@@ -1,0 +1,6 @@
+awscli
+dvc
+dvc[s3]
+pandas
+scikit-learn
+pyyaml

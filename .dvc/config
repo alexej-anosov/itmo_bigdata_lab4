@@ -1,0 +1,5 @@
+[core]
+    remote = yandexbucket001
+['remote "yandexbucket001"']
+    url = s3://itmo-bigdata-lab1
+    endpointurl = https://storage.yandexcloud.net/
