@@ -1,0 +1,27 @@
+stages:
+  prepare:
+    cmd: python prepare.py
+    deps:
+    - data/dataset.csv
+    - prepare.py
+    outs:
+    - data/test.csv
+    - data/train.csv
+  train:
+    cmd: python train.py
+    deps:
+    - data/train.csv
+    - train.py
+    outs:
+    - data/weights.joblib
+    params:
+    - train
+  test:
+    cmd: python test.py
+    deps:
+    - data/test.csv
+    - data/weights.joblib
+    - test.py
+    metrics:
+    - data/metrics.json:
+        cache: false

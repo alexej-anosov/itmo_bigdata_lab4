@@ -14,6 +14,7 @@ X_test = test.drop(['datetime', 'count', 'casual', 'registered'], axis=1)
 y_test = test['count']
 
 predictions = model.predict(X_test)
+predictions = [max(0, x) for x in predictions]
 
 rmsle = root_mean_squared_log_error(y_test, predictions)
 

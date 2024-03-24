@@ -1,0 +1,65 @@
+schema: '2.0'
+stages:
+  prepare:
+    cmd: python prepare.py
+    deps:
+    - path: data/dataset.csv
+      hash: md5
+      md5: 2219249bc86a065cdadae737a7e3033d
+      size: 648353
+    - path: prepare.py
+      hash: md5
+      md5: 650478fd9c03316293142b5b119ac3e7
+      size: 567
+    outs:
+    - path: data/test.csv
+      hash: md5
+      md5: 3313c44e8552c5015006fad706d18afb
+      size: 222845
+    - path: data/train.csv
+      hash: md5
+      md5: 6ae88cbe2e5a5c5cffaf002df92ec77e
+      size: 617794
+  train:
+    cmd: python train.py
+    deps:
+    - path: data/train.csv
+      hash: md5
+      md5: 6ae88cbe2e5a5c5cffaf002df92ec77e
+      size: 617794
+    - path: train.py
+      hash: md5
+      md5: e4180464c2fd378cfdaa6bac2bd8b1bc
+      size: 1222
+    params:
+      params.yaml:
+        train:
+          n_estimators: 1000
+          learning_rate: 0.001
+          max_depth: 10
+          random_state: 42
+    outs:
+    - path: data/weights.joblib
+      hash: md5
+      md5: 2bfb7ad56525f3031ed1a649e3604c0a
+      size: 112384305
+  test:
+    cmd: python test.py
+    deps:
+    - path: data/test.csv
+      hash: md5
+      md5: 3313c44e8552c5015006fad706d18afb
+      size: 222845
+    - path: data/weights.joblib
+      hash: md5
+      md5: 2bfb7ad56525f3031ed1a649e3604c0a
+      size: 112384305
+    - path: test.py
+      hash: md5
+      md5: 81a91b395c992cc7d7ee605a65331f97
+      size: 550
+    outs:
+    - path: data/metrics.json
+      hash: md5
+      md5: 11657e9ec3797090242e73ea7667eadc
+      size: 30
