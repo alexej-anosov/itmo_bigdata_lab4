@@ -1,6 +1,6 @@
-awscli
-dvc
+awscli==1.32.51
+dvc==3.48.4
 dvc[s3]
-pandas
-scikit-learn
-pyyaml
+pandas==2.1.2
+scikit-learn==1.4.1.post1
+pyyaml===6.0.1
