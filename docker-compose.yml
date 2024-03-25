@@ -1,0 +1,8 @@
+version: "3"
+
+services:
+
+  app:
+    container_name: app
+    build: .
+    command: bash -c "python3 prepare.py && python3 train.py && python3 test.py"
