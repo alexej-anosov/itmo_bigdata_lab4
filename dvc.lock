@@ -1,33 +1,33 @@
 schema: '2.0'
 stages:
   prepare:
-    cmd: python prepare.py
+    cmd: python src/prepare.py
     deps:
-    - path: data/dataset.csv
+    - path: src/data/dataset.csv
       hash: md5
       md5: 2219249bc86a065cdadae737a7e3033d
       size: 648353
-    - path: prepare.py
+    - path: src/prepare.py
       hash: md5
       md5: 650478fd9c03316293142b5b119ac3e7
       size: 567
     outs:
-    - path: data/test.csv
+    - path: src/data/test.csv
       hash: md5
       md5: 3313c44e8552c5015006fad706d18afb
       size: 222845
-    - path: data/train.csv
+    - path: src/data/train.csv
       hash: md5
       md5: 6ae88cbe2e5a5c5cffaf002df92ec77e
       size: 617794
   train:
-    cmd: python train.py
+    cmd: python src/train.py
     deps:
-    - path: data/train.csv
+    - path: src/data/train.csv
       hash: md5
       md5: 6ae88cbe2e5a5c5cffaf002df92ec77e
       size: 617794
-    - path: train.py
+    - path: src/train.py
       hash: md5
       md5: e4180464c2fd378cfdaa6bac2bd8b1bc
       size: 1222
@@ -39,27 +39,27 @@ stages:
           max_depth: 7
           random_state: 42
     outs:
-    - path: data/weights.joblib
+    - path: src/data/weights.joblib
       hash: md5
       md5: 81c5bf4ffeb299b9e1f136dc81c74852
       size: 19666931
   test:
-    cmd: python test.py
+    cmd: python src/test.py
     deps:
-    - path: data/test.csv
+    - path: src/data/test.csv
       hash: md5
       md5: 3313c44e8552c5015006fad706d18afb
       size: 222845
-    - path: data/weights.joblib
+    - path: src/data/weights.joblib
       hash: md5
       md5: 81c5bf4ffeb299b9e1f136dc81c74852
       size: 19666931
-    - path: test.py
+    - path: src/test.py
       hash: md5
       md5: c724b6dbd5f304fbbbc29c15e5b6fe27
       size: 573
     outs:
-    - path: data/metrics.json
+    - path: src/data/metrics.json
       hash: md5
       md5: a14d09922e2a47c45a5054ab6bd4ac89
       size: 30
