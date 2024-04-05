@@ -13,5 +13,5 @@ train = df[df['day']<15]
 test = df[df['day']>=15]
 
 
-train.to_csv('src/data/train.csv')
-test.to_csv('src/data/test.csv')
+train.to_csv('src/data/train.csv', index=False)
+test.to_csv('src/data/test.csv', index=False)
