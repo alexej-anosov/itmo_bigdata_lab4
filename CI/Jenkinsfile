@@ -16,22 +16,22 @@ options {
         stage('Clone github repository') {
             steps {
                 cleanWs()
-                sh 'chcp 65001 && git clone -b main https://github.com/alexej-anosov/itmo_bigdata_lab1.git'
+                sh 'git clone -b main https://github.com/alexej-anosov/itmo_bigdata_lab1.git'
 				}
 			}
 
         stage('Checkout repo dir') {
             steps {
-                sh 'chcp 65001 && cd itmo_bigdata_lab1 && dir'
+                sh 'cd itmo_bigdata_lab1 && dir'
 				}
 			}
 
         stage('Login'){
             steps{
                 //withCredentials([usernamePassword(credentialsId: 'mle-template', passwordVariable: 'DOCKER_REGISTRY_PWD', usernameVariable: 'DOCKER_REGISTRY_USER')]){
-                //bat 'chcp 65001 && echo %DOCKER_REGISTRY_PWD% | docker login -u %DOCKER_REGISTRY_USER% --password-stdin'}
-                //bat 'chcp 65001 && echo %DOCKERHUB_CREDS_PSW% | docker login -u %DOCKERHUB_CREDS_USR% --password-stdin'
-                sh 'chcp 65001 && docker login -u %DOCKERHUB_CREDS_USR% -p %DOCKERHUB_CREDS_PSW%'
+                //bat 'echo %DOCKER_REGISTRY_PWD% | docker login -u %DOCKER_REGISTRY_USER% --password-stdin'}
+                //bat 'echo %DOCKERHUB_CREDS_PSW% | docker login -u %DOCKERHUB_CREDS_USR% --password-stdin'
+                sh 'docker login -u %DOCKERHUB_CREDS_USR% -p %DOCKERHUB_CREDS_PSW%'
                 }
             }
 
@@ -39,12 +39,11 @@ options {
             steps {
                 script {
                     try {
-                        sh 'chcp 65001 && cd itmo_bigdata_lab1 && docker-compose build'
+                        sh 'cd itmo_bigdata_lab1 && docker-compose build'
                         }
 
                     finally {
                     sh '''
-                        chcp 65001
                         cd itmo_bigdata_lab1
                         docker-compose up -d
                         '''
@@ -88,14 +87,14 @@ options {
 
         stage('Push'){
             steps{
-                sh 'chcp 65001 && docker push anosov01/itmo_bigdata_lab1:latest'
+                sh 'docker push anosov01/itmo_bigdata_lab1:latest'
             }
         }
 	}
 
     post {
         always {
-            sh 'chcp 65001 && docker logout'
+            sh 'docker logout'
         }
     }
 }
