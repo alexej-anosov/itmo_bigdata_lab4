@@ -19,4 +19,3 @@ RUN aws configure set region ${REGION}
 RUN dvc pull src/data/weights.joblib
 
 ENV PYTHONUNBUFFERED=1
-
