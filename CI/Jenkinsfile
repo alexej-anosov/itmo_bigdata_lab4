@@ -28,7 +28,7 @@ options {
 
         stage('Checkout repo dir') {
             steps {
-                sh 'cd itmo_bigdata_lab1 && dir'
+                sh 'cd itmo_bigdata_lab1 && ls -la'
 				}
 			}
 
