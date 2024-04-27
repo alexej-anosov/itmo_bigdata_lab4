@@ -16,7 +16,7 @@ options {
         stage('Clone github repository') {
             steps {
                 cleanWs()
-                sh 'git clone -b main https://github.com/alexej-anosov/itmo_bigdata_lab1.git'
+                sh 'git clone -b main git@github.com:alexej-anosov/itmo_bigdata_lab1.git'
 				}
 			}
 
