@@ -16,13 +16,13 @@ options {
         stage('Clone github repository') {
             steps {
                 cleanWs()
-                bat 'chcp 65001 && git clone -b main https://github.com/alexej-anosov/itmo_bigdata_lab1.git'
+                sh 'chcp 65001 && git clone -b main https://github.com/alexej-anosov/itmo_bigdata_lab1.git'
 				}
 			}
 
         stage('Checkout repo dir') {
             steps {
-                bat 'chcp 65001 && cd itmo_bigdata_lab1 && dir'
+                sh 'chcp 65001 && cd itmo_bigdata_lab1 && dir'
 				}
 			}
 
@@ -31,7 +31,7 @@ options {
                 //withCredentials([usernamePassword(credentialsId: 'mle-template', passwordVariable: 'DOCKER_REGISTRY_PWD', usernameVariable: 'DOCKER_REGISTRY_USER')]){
                 //bat 'chcp 65001 && echo %DOCKER_REGISTRY_PWD% | docker login -u %DOCKER_REGISTRY_USER% --password-stdin'}
                 //bat 'chcp 65001 && echo %DOCKERHUB_CREDS_PSW% | docker login -u %DOCKERHUB_CREDS_USR% --password-stdin'
-                bat 'chcp 65001 && docker login -u %DOCKERHUB_CREDS_USR% -p %DOCKERHUB_CREDS_PSW%'
+                sh 'chcp 65001 && docker login -u %DOCKERHUB_CREDS_USR% -p %DOCKERHUB_CREDS_PSW%'
                 }
             }
 
@@ -39,11 +39,11 @@ options {
             steps {
                 script {
                     try {
-                        bat 'chcp 65001 && cd itmo_bigdata_lab1 && docker-compose build'
+                        sh 'chcp 65001 && cd itmo_bigdata_lab1 && docker-compose build'
                         }
 
                     finally {
-                    bat '''
+                    sh '''
                         chcp 65001
                         cd itmo_bigdata_lab1
                         docker-compose up -d
@@ -60,8 +60,8 @@ options {
 
         stage('Checkout container logs') {
             steps {
-                dir("mle-template") {
-                        bat '''
+                dir("itmo_bigdata_lab1") {
+                        sh '''
                             docker-compose up -d
                             for /f %%i in ('docker ps -qf "name=^itmo_bigdata_lab1-web-1"') do set containerId=%%i
                             echo %containerId%
@@ -79,7 +79,7 @@ options {
         stage('Checkout coverage report'){
             steps{
                 dir("itmo_bigdata_lab1"){
-                    bat '''
+                    sh '''
                     docker-compose logs -t --tail 10
                     '''
                 }
@@ -88,14 +88,14 @@ options {
 
         stage('Push'){
             steps{
-                bat 'chcp 65001 && docker push anosov01/itmo_bigdata_lab1:latest'
+                sh 'chcp 65001 && docker push anosov01/itmo_bigdata_lab1:latest'
             }
         }
 	}
 
     post {
         always {
-            bat 'chcp 65001 && docker logout'
+            sh 'chcp 65001 && docker logout'
         }
     }
 }
