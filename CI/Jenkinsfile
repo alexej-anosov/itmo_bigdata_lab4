@@ -16,9 +16,7 @@ options {
         stage('Clone github repository') {
             steps {
                 cleanWs()
-                sh 'chmod 600 ~/.ssh/id_rsa'
-                sh 'chmod 700 ~/.ssh'
-                sh 'git clone -b main ssh://git@github.com:alexej-anosov/itmo_bigdata_lab1.git'
+                git clone credentialsId: 'github-ssh-key' -b main ssh://git@github.com:alexej-anosov/itmo_bigdata_lab1.git'
 				}
 			}
 
