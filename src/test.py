@@ -12,7 +12,7 @@ test = pd.read_csv('src/data/test.csv')
 
 X_test = test.drop(['datetime', 'count', 'casual', 'registered'], axis=1)
 y_test = test['count']
-
+print(X_test.loc[0])
 predictions = model.predict(X_test)
 predictions = [max(0, x) for x in predictions]
 
