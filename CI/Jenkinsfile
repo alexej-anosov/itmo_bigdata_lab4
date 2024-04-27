@@ -16,7 +16,13 @@ options {
         stage('Clone github repository') {
             steps {
                 cleanWs()
-                git clone credentialsId: 'github-ssh-key' -b main ssh://git@github.com:alexej-anosov/itmo_bigdata_lab1.git'
+                git(
+                    url: "git@github.com:alexej-anosov/itmo_bigdata_lab1.git",
+                    branch: "main",
+                    credentialsId: "github-ssh-key",
+                    changelog: true,
+                    poll: true
+                )
 				}
 			}
 
