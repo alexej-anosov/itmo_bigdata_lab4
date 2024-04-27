@@ -37,7 +37,7 @@ options {
                 //withCredentials([usernamePassword(credentialsId: 'mle-template', passwordVariable: 'DOCKER_REGISTRY_PWD', usernameVariable: 'DOCKER_REGISTRY_USER')]){
                 //bat 'echo %DOCKER_REGISTRY_PWD% | docker login -u %DOCKER_REGISTRY_USER% --password-stdin'}
                 //bat 'echo %DOCKERHUB_CREDS_PSW% | docker login -u %DOCKERHUB_CREDS_USR% --password-stdin'
-                sh 'sudo chmod 777 /var/run/docker.sock'
+                sh 'sudo usermod -a -G docker jenkins'
                 sh 'docker login -u %DOCKERHUB_CREDS_USR% -p %DOCKERHUB_CREDS_PSW%'
                 }
             }
