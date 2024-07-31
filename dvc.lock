@@ -1,36 +1,36 @@
 schema: '2.0'
 stages:
   prepare:
-    cmd: python src/prepare.py
+    cmd: python src/prepare.py --config_path configs/prepare.yaml
     deps:
-    - path: src/data/dataset.csv
+    - path: data/dataset.csv
       hash: md5
       md5: 2219249bc86a065cdadae737a7e3033d
       size: 648353
     - path: src/prepare.py
       hash: md5
-      md5: b7be39137fedcd9b073e7100e67660e5
-      size: 579
+      md5: 966e886f64d57ff398579e3945bff414
+      size: 1454
     outs:
-    - path: src/data/test.csv
+    - path: data/test.csv
       hash: md5
-      md5: 3313c44e8552c5015006fad706d18afb
-      size: 222845
-    - path: src/data/train.csv
+      md5: 28b200a5a25481f9cbb09f4f9ff433e9
+      size: 208529
+    - path: data/train.csv
       hash: md5
-      md5: 6ae88cbe2e5a5c5cffaf002df92ec77e
-      size: 617794
+      md5: 3882eb013cbddd116d9471e5811f2dac
+      size: 577902
   train:
-    cmd: python src/train.py
+    cmd: python src/train.py --config_path configs/train.yaml
     deps:
-    - path: src/data/train.csv
+    - path: data/train.csv
       hash: md5
-      md5: 6ae88cbe2e5a5c5cffaf002df92ec77e
-      size: 617794
+      md5: 3882eb013cbddd116d9471e5811f2dac
+      size: 577902
     - path: src/train.py
       hash: md5
-      md5: 46b9a7c20fb611f0efb70762e8424367
-      size: 735
+      md5: 1e14da1e1d6b10f4db68a128e9f24ef6
+      size: 1442
     params:
       params.yaml:
         train:
@@ -39,27 +39,27 @@ stages:
           max_depth: 7
           random_state: 42
     outs:
-    - path: src/data/weights.joblib
+    - path: data/weights.joblib
       hash: md5
-      md5: 81c5bf4ffeb299b9e1f136dc81c74852
-      size: 19666931
+      md5: 1f12686898471e1ccf133f8f84ba2379
+      size: 19703197
   test:
-    cmd: python src/test.py
+    cmd: python src/test.py --config_path configs/test.yaml
     deps:
-    - path: src/data/test.csv
+    - path: data/test.csv
       hash: md5
-      md5: 3313c44e8552c5015006fad706d18afb
-      size: 222845
-    - path: src/data/weights.joblib
+      md5: 28b200a5a25481f9cbb09f4f9ff433e9
+      size: 208529
+    - path: data/weights.joblib
       hash: md5
-      md5: 81c5bf4ffeb299b9e1f136dc81c74852
-      size: 19666931
+      md5: 1f12686898471e1ccf133f8f84ba2379
+      size: 19703197
     - path: src/test.py
       hash: md5
-      md5: 585fe5b63d274e792b57ee9a5d70ba67
-      size: 562
+      md5: 7e7c933e222f7056e30214b37133026a
+      size: 1235
     outs:
-    - path: src/data/metrics.json
+    - path: data/metrics.json
       hash: md5
-      md5: a14d09922e2a47c45a5054ab6bd4ac89
+      md5: b0079f45db5e8d909eb4e6a6ac2b0ef7
       size: 30
