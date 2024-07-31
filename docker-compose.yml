@@ -7,7 +7,9 @@ services:
     build:
       context: .
       args:
-        BUCKET_KEY_ID: YCAJE2704dRnl9lCapZI7qWcP
-        BUCKET_KEY: YCOU25ZS2Gem77ajtSfwZ6F7_i9DPWSV9o1aWrf5
-        REGION: ru-central1 
-    command: bash -c "uvicorn main:app --host 0.0.0.0 --port 8029"
+        BUCKET_KEY_ID: ${BUCKET_KEY_ID}
+        BUCKET_KEY: ${BUCKET_KEY}
+        REGION: ${REGION}
+    ports:
+      - '8000:8000'
+    command: bash -c "uvicorn main:app --host 0.0.0.0 --port 8000"
