@@ -5,7 +5,7 @@ import pickle
 from src.pydantic_models import Day
 
 
-with open("src/data/weights.joblib", 'rb') as f:
+with open("data/weights.joblib", 'rb') as f:
     model = pickle.load(f)
 
 
