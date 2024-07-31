@@ -2,26 +2,27 @@ stages:
   prepare:
     cmd: python src/prepare.py
     deps:
-    - src/data/dataset.csv
+    - data/dataset.csv
     - src/prepare.py
     outs:
-    - src/data/test.csv
-    - src/data/train.csv
+    - data/test.csv
+    - data/train.csv
   train:
     cmd: python src/train.py
     deps:
-    - src/data/train.csv
-    - src/train.py
+    - data/train.csv
+    - train.py
     outs:
-    - src/data/weights.joblib
+    - data/weights.joblib
     params:
-    - train
+    - configs/hyperparams.yaml
+      - train
   test:
     cmd: python src/test.py
     deps:
-    - src/data/test.csv
-    - src/data/weights.joblib
-    - src/test.py
+    - data/test.csv
+    - data/weights.joblib
+    - test.py
     metrics:
-    - src/data/metrics.json:
+    - data/metrics.json:
         cache: false
