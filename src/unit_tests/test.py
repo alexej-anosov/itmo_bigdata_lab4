@@ -19,6 +19,3 @@ class TestParamYAML(unittest.TestCase):
             self.assertIn(arg, self.config['train'], f"Required argument '{arg}' is missing.")
             self.assertIsInstance(self.config['train'][arg], arg_type,
                                   f"Type of argument '{arg}' is not {arg_type.__name__}.")
-
-if __name__ == '__main__':
-    unittest.main()

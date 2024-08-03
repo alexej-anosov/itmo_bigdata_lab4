@@ -1,0 +1,14 @@
+[
+    {
+        "season": 1,
+        "holiday": 1,
+        "workingday": 1,
+        "weather": 1,
+        "temp": 0,
+        "atemp": 0,
+        "humidity": 0,
+        "windspeed": 0,
+        "dt": "2024-08-17T08:13:00.000Z"
+      },
+      508.708
+]
