@@ -12,6 +12,11 @@ with open("data/weights.joblib", 'rb') as f:
 app = FastAPI()
 
 
+@app.get("/health")
+def get_health():
+    return '', 200
+
+
 @app.post("/request/")
 def model_request(day: Day) -> float:
     day_list = list(dict(day).values())
