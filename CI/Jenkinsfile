@@ -8,14 +8,16 @@ pipeline {
         LANGUAGE = "en_US.UTF-8"
     }
 
-options {
-        timestamps()
-        skipDefaultCheckout(true)
-	}
+    options {
+            timestamps()
+            skipDefaultCheckout(true)
+        }
+
     stages {
         stage('Clone github repository') {
             steps {
-                cleanWs()
+                echo 'Cloning repo'
+                sh 'sudo rm -r -f itmo_bigdata_lab1'
                 git(
                     url: "git@github.com:alexej-anosov/itmo_bigdata_lab1.git",
                     branch: "main",
@@ -26,82 +28,43 @@ options {
 				}
 			}
 
-        stage('Checkout repo dir') {
-            steps {
-                sh 'ls -la'
-				}
-			}
 
         stage('Login'){
             steps{
-                //withCredentials([usernamePassword(credentialsId: 'mle-template', passwordVariable: 'DOCKER_REGISTRY_PWD', usernameVariable: 'DOCKER_REGISTRY_USER')]){
-                //bat 'echo %DOCKER_REGISTRY_PWD% | docker login -u %DOCKER_REGISTRY_USER% --password-stdin'}
-                //bat 'echo %DOCKERHUB_CREDS_PSW% | docker login -u %DOCKERHUB_CREDS_USR% --password-stdin'
-                sh 'sudo usermod -a -G docker jenkins'
                 sh 'docker login -u %DOCKERHUB_CREDS_USR% -p %DOCKERHUB_CREDS_PSW%'
                 }
             }
 
-        stage('Create and run docker container') {
-            steps {
-                script {
-                    try {
-                        sh 'cd itmo_bigdata_lab1 && docker-compose build'
-                        }
-
-                    finally {
-                    sh '''
-                        cd itmo_bigdata_lab1
-                        docker-compose up -d
-                        '''
-                        }
-				    }
-                }
-            }
-
-        // use for multi containers:
-        //docker exec %containerId% cd app && coverage run src/unit_tests/test_preprocess.py && coverage run -a src/unit_tests/test_training.py && coverage report -m
-        //use for single container (with auth):
-        //docker run --name mle-template_web_1 cd app && coverage run src/unit_tests/test_preprocess.py && coverage run -a src/unit_tests/test_training.py && coverage report -m
-
-        stage('Checkout container logs') {
+        stage('Build docker') {
             steps {
                 dir("itmo_bigdata_lab1") {
-                        sh '''
-                            docker-compose up -d
-                            for /f %%i in ('docker ps -qf "name=^itmo_bigdata_lab1-web-1"') do set containerId=%%i
-                            echo %containerId%
-                            IF "%containerId%" == "" (
-                                echo "No container running"
-                            )
-                            ELSE (
-                                docker logs --tail 1000 -f %containerId%
-                                )
-                        '''
-                    }
-            }
-        }
-
-        stage('Checkout coverage report'){
-            steps{
-                dir("itmo_bigdata_lab1"){
-                    sh '''
-                    docker-compose logs -t --tail 10
-                    '''
+                    sh 'sudo docker compose build'
                 }
             }
         }
 
-        stage('Push'){
-            steps{
-                sh 'docker push anosov01/itmo_bigdata_lab1:latest'
+        stage('Run docker') {
+            steps {
+                dir("itmo_bigdata_lab1") {
+                    sh 'sudo docker compose up'
+                }
             }
         }
-	}
+        stage('Push to DockerHub') {
+            steps {
+                dir("itmo_bigdata_lab1") {
+                    sh 'sudo docker push anosov01/itmo_bigdata_lab1:latest'
+                }
+            }
+        }
+    }
 
     post {
         always {
-            sh 'docker logout'
+            dir("itmo_bigdata_lab1") {
+                sh 'sudo docker compose down 2>null'
+                sh 'sudo docker logout docker.io'
+            }
         }
     }
 }
