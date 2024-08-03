@@ -5,7 +5,7 @@ import pytest
 import json
 
 
-def wait_until_active(max_attempts=10, url='http://localhost:8000/'):
+def wait_until_active(max_attempts=10, url='http://0.0.0.0:8000/health'):
     for attempt in range(max_attempts):
         try:
             print(f"Attempt {attempt + 1}: Trying to connect...")
@@ -23,7 +23,7 @@ def setup_and_teardown():
     yield
 
 
-def test_json_file(url='http://localhost:8000/request/'):
+def test_json_file(url='http://0.0.0.0:8000/request/'):
     headers = {'Content-Type': 'application/json'}
     for json_file_path in glob.glob("../tests/*.json"):          
         with open(json_file_path, 'r') as json_file:
