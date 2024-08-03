@@ -40,13 +40,6 @@ pipeline {
             }
         }
 
-        stage('Run docker') {
-            steps {
-                dir("itmo_bigdata_lab1") {
-                    sh 'docker compose up'
-                }
-            }
-        }
         stage('Push to DockerHub') {
             steps {
                 dir("itmo_bigdata_lab1") {
@@ -59,7 +52,6 @@ pipeline {
     post {
         always {
             dir("itmo_bigdata_lab1") {
-                sh 'docker compose down'
                 sh 'docker logout docker.io'
             }
         }
