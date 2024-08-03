@@ -17,7 +17,7 @@ pipeline {
         stage('Clone github repository') {
             steps {
                 touch newfile.txt
-                echo 'Cloning repo1'
+                echo 'Cloning repo12'
                 sh 'sudo rm -r -f itmo_bigdata_lab1'
                 git(
                     url: "git@github.com:alexej-anosov/itmo_bigdata_lab1.git",
