@@ -14,7 +14,14 @@ pipeline {
                 echo 'Cloning repo '
                 sh 'curl https://ipecho.net/plain'
                 sh 'ls'
-                // sh 'sudo rm -r -f itmo_bigdata_lab1'
+                sh 'sudo rm -r -f itmo_bigdata_lab1'
+                git(
+                    url: "git@github.com:alexej-anosov/itmo_bigdata_lab1.git",
+                    branch: "main",
+                    credentialsId: "alexej-key",
+                    changelog: true,
+                    poll: true
+                )
 				}
 			}
 
@@ -25,36 +32,36 @@ pipeline {
                 }
             }
 
-    //     stage('Build docker') {
-    //         steps {
-    //             dir("itmo_bigdata_lab1") {
-    //                 sh 'sudo docker compose build'
-    //             }
-    //         }
-    //     }
+        stage('Build docker') {
+            steps {
+                dir("itmo_bigdata_lab1") {
+                    sh 'sudo docker compose build'
+                }
+            }
+        }
 
-    //     stage('Run docker') {
-    //         steps {
-    //             dir("itmo_bigdata_lab1") {
-    //                 sh 'sudo docker compose up'
-    //             }
-    //         }
-    //     }
-    //     stage('Push to DockerHub') {
-    //         steps {
-    //             dir("itmo_bigdata_lab1") {
-    //                 sh 'sudo docker push anosov01/itmo_bigdata_lab1:latest'
-    //             }
-    //         }
-    //     }
-    // }
+        stage('Run docker') {
+            steps {
+                dir("itmo_bigdata_lab1") {
+                    sh 'sudo docker compose up'
+                }
+            }
+        }
+        stage('Push to DockerHub') {
+            steps {
+                dir("itmo_bigdata_lab1") {
+                    sh 'sudo docker push anosov01/itmo_bigdata_lab1:latest'
+                }
+            }
+        }
+    }
 
-    // post {
-    //     always {
-    //         dir("itmo_bigdata_lab1") {
-    //             sh 'sudo docker compose down 2>null'
-    //             sh 'sudo docker logout docker.io'
-    //         }
-    //     }
+    post {
+        always {
+            dir("itmo_bigdata_lab1") {
+                sh 'sudo docker compose down 2>null'
+                sh 'sudo docker logout docker.io'
+            }
+        }
     }
 }
