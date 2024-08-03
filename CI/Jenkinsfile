@@ -35,7 +35,6 @@ pipeline {
         stage('Build docker') {
             steps {
                 dir("itmo_bigdata_lab1") {
-                    // sh '$BUCKET_KEY_ID'
                     sh 'docker compose build'
                 } 
             }
@@ -61,7 +60,7 @@ pipeline {
         always {
             dir("itmo_bigdata_lab1") {
                 sh 'docker compose down'
-                // sh 'docker logout docker.io'
+                sh 'docker logout docker.io'
             }
         }
     }
