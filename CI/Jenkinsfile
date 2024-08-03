@@ -59,8 +59,8 @@ pipeline {
     post {
         always {
             dir("itmo_bigdata_lab1") {
-                sh 'docker compose down 2>null'
-                sh 'docker logout docker.io'
+                sh 'docker compose down'
+                // sh 'docker logout docker.io'
             }
         }
     }
