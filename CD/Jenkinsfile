@@ -20,7 +20,7 @@ pipeline {
 
         stage('Pull image') {
             steps {
-                sh 'sudo docker pull anosov01/itmo_bigdata_lab1:latest'
+                sh 'docker pull anosov01/itmo_bigdata_lab1:latest'
             }
         }
         
@@ -28,7 +28,7 @@ pipeline {
             steps {
                 sh 'docker stop $(docker ps -a -q)'
                 sh 'docker rm $(docker ps -a -q)'
-                sh 'sudo docker compose up'
+                sh 'docker compose up'
             }
         }
     }
