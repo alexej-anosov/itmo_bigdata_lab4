@@ -35,11 +35,11 @@ pipeline {
         stage('Build docker') {
             steps {
                 dir("itmo_bigdata_lab1") {
-                    sh 'docker compose build'
-                }
+                    sh 'docker compose build --build-arg BUCKET_KEY_ID=$BUCKET_KEY_ID  --build-arg BUCKET_KEY=$BUCKET_KEY --build-arg REGION=$REGION'
+                } 
             }
         }
-
+docker-compose build --build-arg YOUR_ENV_VAR=${YOUR_ENV_VAR}
         stage('Run docker') {
             steps {
                 dir("itmo_bigdata_lab1") {
