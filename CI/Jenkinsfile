@@ -35,7 +35,7 @@ pipeline {
         stage('Build docker') {
             steps {
                 dir("itmo_bigdata_lab1") {
-                    sh '$BUCKET_KEY_ID'
+                    // sh '$BUCKET_KEY_ID'
                     sh 'docker compose build'
                 } 
             }
