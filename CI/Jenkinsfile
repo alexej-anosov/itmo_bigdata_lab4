@@ -12,8 +12,8 @@ pipeline {
         stage('Clone github repository') {
             steps {
                 echo 'Cloning repo '
-                sh 'echo curl https://ipecho.net/plain'
-                sh 'echo ls'
+                sh 'curl https://ipecho.net/plain'
+                sh 'ls'
                 // sh 'sudo rm -r -f itmo_bigdata_lab1'
 				}
 			}
