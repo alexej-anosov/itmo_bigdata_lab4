@@ -28,7 +28,7 @@ pipeline {
             steps {
                 sh 'docker stop $(docker ps -a -q)'
                 sh 'docker rm $(docker ps -a -q)'
-                sh 'docker compose up'
+                sh 'docker compose up -d'
             }
         }
     }
