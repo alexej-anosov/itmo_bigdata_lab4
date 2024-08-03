@@ -9,22 +9,15 @@ pipeline {
     }
 
     stages {
-    //     stage('Clone github repository') {
-    //         steps {
-    //             touch newfile.txt
-    //             echo 'Cloning repo '
-    //             echo 'curl https://ipecho.net/plain'
-    //             // echo 'ls'
-    //             // sh 'sudo rm -r -f itmo_bigdata_lab1'
-    //             git(
-    //                 url: "git@github.com:alexej-anosov/itmo_bigdata_lab1.git",
-    //                 branch: "main",
-    //                 credentialsId: "github-ssh-key",
-    //                 changelog: true,
-    //                 poll: true
-    //             )
-	// 			}
-	// 		}
+        stage('Clone github repository') {
+            steps {
+                touch newfile.txt
+                echo 'Cloning repo '
+                echo 'curl https://ipecho.net/plain'
+                echo 'ls'
+                // sh 'sudo rm -r -f itmo_bigdata_lab1'
+				}
+			}
 
 
         stage('Login'){
