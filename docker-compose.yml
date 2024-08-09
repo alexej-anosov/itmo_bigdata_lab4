@@ -2,8 +2,19 @@ version: "3"
 
 services:
 
+
+  mysql:
+    image: mysql:5.7
+    container_name: mysql
+    environment:
+      MYSQL_DATABASE: ${DATABASE_NAME}
+      MYSQL_ROOT_PASSWORD: ${DATABASE_PASSWORD}
+    ports:
+      - "3306:3306"
+
   app:
-    image: anosov01/itmo_bigdata_lab1
+    restart: always
+    image: anosov01/itmo_bigdata_lab2
     container_name: app
     build:
       context: .
@@ -13,4 +24,7 @@ services:
         REGION: ${REGION}
     ports:
       - '8000:8000'
-    command: bash -c "pytest src/tests/test.py & pytest tests/test.py & uvicorn main:app --host 0.0.0.0 --port 8000"
+    command: bash -c "alembic upgrade head \
+     && pytest tests/test.py && pytest ../tests/test.py & uvicorn main:app --host 0.0.0.0 --port 8000"
+    depends_on:
+      - mysql

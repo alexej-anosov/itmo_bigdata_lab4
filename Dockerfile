@@ -1,22 +1,25 @@
 FROM python:3.10
 
+ENV PYTHONUNBUFFERED=1
+
 ARG BUCKET_KEY_ID
 ARG BUCKET_KEY
 ARG REGION
 
-WORKDIR /app
-
-COPY requirements.txt /app/
+COPY requirements.txt requirements.txt
 
 RUN pip install --upgrade pip && pip install -r requirements.txt
 
-COPY . /app/
-
-RUN echo ${BUCKET_KEY_ID}
 RUN aws configure set aws_access_key_id ${BUCKET_KEY_ID}
 RUN aws configure set aws_secret_access_key ${BUCKET_KEY}
 RUN aws configure set region ${REGION}
 
+COPY . /app
+
+WORKDIR /app
+RUN echo $(ls)
 RUN dvc pull data/weights.joblib
 
-ENV PYTHONUNBUFFERED=1
+
+WORKDIR src
+RUN echo $(ls)

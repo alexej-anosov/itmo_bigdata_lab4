@@ -4,11 +4,13 @@ aiohttp==3.10.0
 aiohttp-retry==2.8.3
 aioitertools==0.11.0
 aiosignal==1.3.1
+alembic==1.13.2
 amqp==5.2.0
 annotated-types==0.7.0
 antlr4-python3-runtime==4.9.3
 anyio==4.4.0
 appdirs==1.4.4
+asyncmy==0.2.9
 asyncssh==2.15.0
 atpublic==5.0
 attrs==23.2.0
@@ -52,6 +54,7 @@ funcy==2.0
 gitdb==4.0.11
 GitPython==3.1.43
 grandalf==0.8
+greenlet==3.0.3
 gto==1.7.1
 h11==0.14.0
 hydra-core==1.3.2
@@ -61,9 +64,12 @@ iterative-telemetry==0.0.8
 jmespath==1.0.1
 joblib==1.4.2
 kombu==5.3.7
+Mako==1.3.5
 markdown-it-py==3.0.0
+MarkupSafe==2.1.5
 mdurl==0.1.2
 multidict==6.0.5
+mysql-connector-python==9.0.0
 networkx==3.3
 numpy==1.26.4
 omegaconf==2.3.0
@@ -78,6 +84,7 @@ psutil==6.0.0
 pyasn1==0.6.0
 pycparser==2.22
 pydantic==2.8.2
+pydantic-settings==2.4.0
 pydantic_core==2.20.1
 pydot==3.0.1
 pygit2==1.15.1
@@ -86,6 +93,7 @@ pygtrie==2.5.0
 pyparsing==3.1.2
 pytest==8.3.2
 python-dateutil==2.9.0.post0
+python-dotenv==1.0.1
 pytz==2024.1
 PyYAML==6.0.1
 requests==2.32.3
@@ -105,6 +113,7 @@ shtab==1.7.1
 six==1.16.0
 smmap==5.0.1
 sniffio==1.3.1
+SQLAlchemy==2.0.32
 sqltrie==0.11.0
 starlette==0.37.2
 tabulate==0.9.0
