@@ -18,9 +18,8 @@ RUN aws configure set region ${REGION}
 COPY . /app
 
 WORKDIR /app
-RUN echo $(ls)
 RUN dvc pull data/weights.joblib
 
-
 WORKDIR src
-RUN echo $(ls)
+
+ENV DB_URL = ${DB_URL}

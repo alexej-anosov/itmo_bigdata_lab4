@@ -27,8 +27,6 @@ services:
         BUCKET_KEY_ID: ${BUCKET_KEY_ID}
         BUCKET_KEY: ${BUCKET_KEY}
         REGION: ${REGION}
-      environment:         
-        DB_URL: ${DB_URL}
     ports:
       - '8000:8000'
     command: bash -c "alembic upgrade head && pytest tests/test.py && pytest ../tests/test.py & uvicorn main:app --host 0.0.0.0 --port 8000"
