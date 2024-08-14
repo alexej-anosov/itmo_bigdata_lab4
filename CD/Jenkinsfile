@@ -24,6 +24,13 @@ pipeline {
             }
         }
 
+        stage('Install Dependencies') {
+            steps {
+                // Install Python and pytest dependencies
+                sh 'pip install pytest'
+            }
+        }
+
 
         stage('Run container') {
             steps {
