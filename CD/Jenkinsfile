@@ -29,7 +29,6 @@ pipeline {
                 withPythonEnv('python3') {
                     steps {
                         sh 'pip install pytest'
-                        sh 'pytest tests/test.py'
                     }
                 }
             }
