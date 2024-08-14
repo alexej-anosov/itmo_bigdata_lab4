@@ -18,7 +18,6 @@ services:
       - "3306:3306"
 
   app:
-    restart: always
     image: anosov01/itmo_bigdata_lab2
     container_name: app
     build:
@@ -30,7 +29,7 @@ services:
         DB_URL: ${DB_URL}
     ports:
       - '8000:8000'
-    command: bash -c "alembic upgrade head && pytest tests/test.py && pytest ../tests/test.py & uvicorn main:app --host 0.0.0.0 --port 8000"
+    command: bash -c "alembic upgrade head && pytest tests/test.py && (pytest ../tests/test.py & uvicorn main:app --host 0.0.0.0 --port 8000)"
     depends_on:
       mysql:
         condition: service_healthy
