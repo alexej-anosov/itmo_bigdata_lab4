@@ -39,6 +39,7 @@ pipeline {
                 script {
                     // Set up Python environment
                     sh '''
+                        apt install python3.12-venv
                         python3 -m venv venv
                         . venv/bin/activate
                         pip install pytest
