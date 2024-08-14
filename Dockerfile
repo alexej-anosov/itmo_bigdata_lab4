@@ -5,6 +5,7 @@ ENV PYTHONUNBUFFERED=1
 ARG BUCKET_KEY_ID
 ARG BUCKET_KEY
 ARG REGION
+ARG DB_URL
 
 COPY requirements.txt requirements.txt
 
