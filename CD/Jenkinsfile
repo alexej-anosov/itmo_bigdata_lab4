@@ -24,28 +24,6 @@ pipeline {
             }
         }
 
-        // stage("test PythonEnv") {
-        //     steps {
-        //         withPythonEnv('python3') {
-        //             script {
-        //                 sh 'pip install pytest'
-        //             }
-        //         }
-        //     }
-        // }
-
-        stage('test PythonEnv') {
-            steps {
-                script {
-                    // Set up Python environment
-                    sh '''
-                        python -m venv venv
-                        . venv/bin/activate
-                        pip install pytest
-                    '''
-                }
-            }
-        }
 
         stage('Run container') {
             steps {
