@@ -24,10 +24,13 @@ pipeline {
             }
         }
 
-        stage('Install Dependencies') {
+
+        stage('Setup Virtual Environment') {
             steps {
-                // Install Python and pytest dependencies
-                sh 'pip install pytest'
+                // Create a virtual environment in the Jenkins workspace
+                sh 'python3 -m venv venv'
+                // Activate the virtual environment and install dependencies
+                sh '. venv/bin/activate && pip install pytest'
             }
         }
 
