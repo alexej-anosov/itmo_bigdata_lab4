@@ -22,4 +22,4 @@ RUN dvc pull data/weights.joblib
 
 WORKDIR src
 
-ENV DB_URL = ${DB_URL}
+ENV DB_URL=${DB_URL}
