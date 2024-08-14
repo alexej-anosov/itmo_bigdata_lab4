@@ -26,7 +26,7 @@ pipeline {
 
         stage("test PythonEnv") {
             steps {
-                withPythonEnv('/root/itmo_bigdata_lab2/venv/bin/python3') {
+                withPythonEnv('python3') {
                     script {
                         sh 'pip install pytest'
                     }
