@@ -31,4 +31,4 @@ def test_json_file(url='http://0.0.0.0:8000/request/'):
         response = requests.post(url, json=X, headers=headers)
         assert response.ok, f"Request failed for file {json_file_path}"
         assert response.json() == y, f"Prediction is not correct for file {json_file_path}: {response.json()} != {y} "
-        print(response.json())
+

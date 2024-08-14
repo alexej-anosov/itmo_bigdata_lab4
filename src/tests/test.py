@@ -4,7 +4,7 @@ import os
 
 class TestParamYAML(unittest.TestCase):
     def setUp(self):
-        with open('params.yaml', 'r') as file:
+        with open('../params.yaml', 'r') as file:
             self.config = yaml.safe_load(file)
 
     def test_train_args_presence(self):
