@@ -9,6 +9,11 @@ services:
     environment:
       MYSQL_DATABASE: ${DATABASE_NAME}
       MYSQL_ROOT_PASSWORD: ${DATABASE_PASSWORD}
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      retries: 5
+      start_period: 10s
+      timeout: 5s
     ports:
       - "3306:3306"
 
@@ -24,7 +29,7 @@ services:
         REGION: ${REGION}
     ports:
       - '8000:8000'
-    command: bash -c "alembic upgrade head \
-     && pytest tests/test.py && pytest ../tests/test.py & uvicorn main:app --host 0.0.0.0 --port 8000"
+    command: bash -c "alembic upgrade head && uvicorn main:app --host 0.0.0.0 --port 8000"
     depends_on:
-      - mysql
+      mysql:
+        condition: service_healthy

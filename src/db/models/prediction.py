@@ -2,6 +2,7 @@ from .shared import intpk, created_at
 from sqlalchemy.orm import Mapped, mapped_column
 from db.core import Base
 
+
 class Prediction(Base):
     __tablename__ = 'prediction'
 

@@ -5,11 +5,10 @@ from datetime import datetime
 
 
 class Season(int, Enum):
-    sprring = 1
+    spring = 1
     summer = 2
     fall = 3
     winter = 4
-    
     
 class Weather(int, Enum):
     clear = 1
