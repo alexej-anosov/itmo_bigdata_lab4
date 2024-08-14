@@ -23,7 +23,15 @@ pipeline {
                 sh 'docker pull anosov01/itmo_bigdata_lab2:latest'
             }
         }
-        
+
+        stage("test PythonEnv") {
+
+            withPythonEnv('python3') {
+                sh 'pip install pytest'
+                sh 'pytest tests/test.py'
+            }
+        }
+
         stage('Run container') {
             steps {
                 sh 'docker rm -v -f $(docker ps -qa) && docker compose up'
