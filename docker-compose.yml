@@ -27,6 +27,7 @@ services:
         BUCKET_KEY_ID: ${BUCKET_KEY_ID}
         BUCKET_KEY: ${BUCKET_KEY}
         REGION: ${REGION}
+      environment:         
         DB_URL: ${DB_URL}
     ports:
       - '8000:8000'
