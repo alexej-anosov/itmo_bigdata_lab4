@@ -1,18 +1,13 @@
 import os
-from dotenv import load_dotenv
+from ansible_vault import Vault
 
-load_dotenv()
+
+vault = Vault(os.getenv('VAULT_PASSWORD'))
+
+secrets = vault.load(open('../secrets.yml').read())
 
 class Config:
-    BUCKET_KEY_ID = os.getenv('BUCKET_KEY_ID')
-    BUCKET_KEY = os.getenv('BUCKET_KEY')
-    REGION = os.getenv('REGION')
-    DATABASE_NAME = os.getenv('DATABASE_NAME')
-    DATABASE_PASSWORD = os.getenv('DATABASE_PASSWORD')
-    DB_URL = os.getenv('DB_URL')
+    DB_URL = secrets["DB_URL"]
 
     
 config = Config()
-
-for name, value in os.environ.items():
-    print("{0}: {1}".format(name, value))

@@ -5,7 +5,7 @@ ENV PYTHONUNBUFFERED=1
 ARG BUCKET_KEY_ID
 ARG BUCKET_KEY
 ARG REGION
-ARG DB_URL
+ARG VAULT_PASSWORD
 
 COPY requirements.txt requirements.txt
 
@@ -22,4 +22,4 @@ RUN dvc pull data/weights.joblib
 
 WORKDIR src
 
-ENV DB_URL=${DB_URL}
+ENV VAULT_PASSWORD=${VAULT_PASSWORD}
