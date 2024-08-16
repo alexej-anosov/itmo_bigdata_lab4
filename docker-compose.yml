@@ -18,7 +18,7 @@ services:
       - "3306:3306"
 
   app:
-    image: anosov01/itmo_bigdata_lab2
+    image: anosov01/itmo_bigdata_lab3
     container_name: app
     build:
       context: .
