@@ -2,7 +2,8 @@ import pandas as pd
 from datetime import datetime
 import argparse
 import yaml
-
+#  && python kafka/consumer_service.py
+#   && pytest tests/test.py; uvicorn main:app --host 0.0.0.0 --port 8000  & pytest ../tests/test.py
 
 class SplitsCreator:
     def __init__(self, config_path):

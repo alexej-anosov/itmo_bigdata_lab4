@@ -4,15 +4,14 @@ from sqlalchemy.engine import Connection
 from sqlalchemy.ext.asyncio import async_engine_from_config
 from sqlalchemy import pool
 from alembic import context
-from os import getenv
-from src import config
 from db import Base
+from config import config as conf
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
 config = context.config
 section = config.config_ini_section
-config.set_section_option(section, "DB_URL", config.DB_URL)
+config.set_section_option(section, "DB_URL", conf.DB_URL)
 
 # Interpret the config file for Python logging.
 # This line sets up loggers basically.
@@ -44,7 +43,7 @@ def run_migrations_offline() -> None:
 
     """
     context.configure(
-        url=getenv("DB_URL"),
+        url=conf.DB_URL,
         target_metadata=target_metadata,
         literal_binds=True,
         dialect_opts={"paramstyle": "named"},
@@ -66,7 +65,7 @@ async def run_async_migrations() -> None:
     and associate a connection with the context.
 
     """
-    config.set_main_option("sqlalchemy.url", getenv('DB_URL'))
+    config.set_main_option("sqlalchemy.url",  conf.DB_URL)
     
     connectable = async_engine_from_config(
         config.get_section(config.config_ini_section, {}),
