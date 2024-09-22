@@ -14,9 +14,9 @@ pipeline {
                 echo 'Cloning repo'
                 sh 'curl https://ipecho.net/plain'
                 sh 'ls'
-                sh 'rm -r -f itmo_bigdata_lab3'
+                sh 'rm -r -f itmo_bigdata_lab4'
                 git(
-                    url: "git@github.com:alexej-anosov/itmo_bigdata_lab3.git",
+                    url: "git@github.com:alexej-anosov/itmo_bigdata_lab4.git",
                     branch: "main",
                     credentialsId: "alexej-key",
                     changelog: true,
@@ -34,7 +34,7 @@ pipeline {
 
         stage('Build docker') {
             steps {
-                dir("itmo_bigdata_lab3") {
+                dir("itmo_bigdata_lab4") {
                     sh 'docker compose build'
                 } 
             }
@@ -42,8 +42,8 @@ pipeline {
 
         stage('Push to DockerHub') {
             steps {
-                dir("itmo_bigdata_lab3") {
-                    sh 'docker push anosov01/itmo_bigdata_lab3:latest'
+                dir("itmo_bigdata_lab4") {
+                    sh 'docker push anosov01/itmo_bigdata_lab4:latest'
                 }
             }
         }
@@ -51,7 +51,7 @@ pipeline {
 
     post {
         always {
-            dir("itmo_bigdata_lab3") {
+            dir("itmo_bigdata_lab4") {
                 sh 'docker logout docker.io'
             }
         }

@@ -20,7 +20,7 @@ pipeline {
 
         stage('Pull image') {
             steps {
-                sh 'docker pull anosov01/itmo_bigdata_lab3:latest'
+                sh 'docker pull anosov01/itmo_bigdata_lab4:latest'
             }
         }
 
