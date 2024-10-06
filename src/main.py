@@ -20,7 +20,7 @@ async def get_health():
 
 
 @app.post("/request/")
-async def model_request(day: Day) -> float:
+async def model_request(day: Day) -> dict:
     day_list = list(dict(day).values())
     day_array = np.array(day_list)
     result = model.predict(day_array.reshape(1, -1))
@@ -28,5 +28,5 @@ async def model_request(day: Day) -> float:
     day = dict(day)
     day['result'] = result
     await producer.send('save_to_db', day)
-    return result
+    return {"result": result}
 
